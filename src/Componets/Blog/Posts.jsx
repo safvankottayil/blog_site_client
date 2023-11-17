@@ -3,11 +3,12 @@ import { FaRegStar } from "react-icons/fa6";
 import { GET } from "../../Services/userControll";
 import Postfallback from "./Postfallback";
 import { UserContext } from "../../Context/Context";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
-function Posts({ currentpage, setblogs, setpages,blogs }) {
-   const {SetBlog}=useContext(UserContext)
-   const navigate=useNavigate()
+function Posts({ currentpage, setblogs, setpages, blogs }) {
+ 
+  const { SetBlog } = useContext(UserContext);
+  const navigate = useNavigate();
   useEffect(() => {
     GET("/blogs", currentpage).then((res) => {
       console.log(res);
@@ -17,15 +18,28 @@ function Posts({ currentpage, setblogs, setpages,blogs }) {
       }
     });
   }, [currentpage]);
-  function OpenSingleBlog(obj){
-  SetBlog(obj)
-  navigate('/blog/'+obj.title)
+  function OpenSingleBlog(obj,index) {
+    SetBlog(obj);
+    let title = obj[index].title.split(" ");
+    console.log(title);
+    let name = "";
+    title.forEach((word, i) => {
+      if (i == 0) {
+      } else {
+        name += "-";
+      }
+      name += word.trim();
+    });
+      navigate('/blog/'+name)
   }
   return (
     <>
-      {blogs.map((item) => {
+      {blogs.map((item,i) => {
         return (
-          <div onClick={()=>OpenSingleBlog(item)} className="flex col-span-1 h-fit ">
+          <div
+            onClick={() => OpenSingleBlog(blogs,i)}
+            className="flex col-span-1 h-fit "
+          >
             <div className="flex flex-col w-full h-full rounded-sm ">
               <img src={item?.image} className="h-60 w-full" alt="" />
               <div className="overflow-hidden">
@@ -54,9 +68,9 @@ function Posts({ currentpage, setblogs, setpages,blogs }) {
           </div>
         );
       })}
-      {blogs[0]?'':<Postfallback/>}
+      {blogs[0] ? "" : <Postfallback />}
     </>
   );
 }
 
-export default Posts;
+export default React.memo(Posts)
