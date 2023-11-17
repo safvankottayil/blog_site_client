@@ -6,6 +6,7 @@ import Home from '../pages/Homepage'
 import { UserContext } from '../Context/Context'
 import Addblog from '../pages/Addblog'
 import Blogpage from '../pages/Blogpage'
+import SingleBlogpage from '../pages/SingleBlogpage'
 function User({token}) {
   
   // const [token,setToken]=useState()
@@ -14,6 +15,7 @@ console.log(token,'///');
   <Routes>
     <Route path='/' element={<Home/>} />
     <Route path='/blog' element={<Blogpage/>}/>
+    <Route path='/blog/:title' element={<SingleBlogpage/>} />
     <Route path='/addblog' element={token?<Addblog/>:<Navigate to={'/login'} />} />
     <Route path='/login' element={token?<Navigate to={'/'}/>:<Login/>} />
     <Route path='/signup' element={token==null?<Signup/>: <Navigate to={'/'}/>} />

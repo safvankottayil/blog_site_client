@@ -1,9 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { FaRegStar } from "react-icons/fa6";
 import { GET } from "../../Services/userControll";
 import Postfallback from "./Postfallback";
+import { UserContext } from "../../Context/Context";
+import { useNavigate } from "react-router-dom";
 
 function Posts({ currentpage, setblogs, setpages,blogs }) {
+   const {SetBlog}=useContext(UserContext)
+   const navigate=useNavigate()
   useEffect(() => {
     GET("/blogs", currentpage).then((res) => {
       console.log(res);
@@ -13,11 +17,15 @@ function Posts({ currentpage, setblogs, setpages,blogs }) {
       }
     });
   }, [currentpage]);
+  function OpenSingleBlog(obj){
+  SetBlog(obj)
+  navigate('/blog/'+obj.title)
+  }
   return (
     <>
       {blogs.map((item) => {
         return (
-          <div className="flex col-span-1 h-fit ">
+          <div onClick={()=>OpenSingleBlog(item)} className="flex col-span-1 h-fit ">
             <div className="flex flex-col w-full h-full rounded-sm ">
               <img src={item?.image} className="h-60 w-full" alt="" />
               <div className="overflow-hidden">
