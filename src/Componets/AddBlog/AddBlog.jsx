@@ -254,7 +254,7 @@ function AddBlog() {
             <textarea
               onChange={InputHandle}
               ref={inputRef}
-              className="m-2 rounded-md p-1 h-14 flex flex-grow"
+              className="m-2 dark:text-black rounded-md p-1 h-14 flex flex-grow"
             ></textarea>
             {data[data.length-1]?.save==false?
             <GiPlayButton onClick={()=>{setData([...data,{save:true}]),submitCheck()}} className="w-14 h-14 rounded-md p-2 border-2 mx-2" />:''}
