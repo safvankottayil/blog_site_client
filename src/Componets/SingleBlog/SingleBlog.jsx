@@ -5,6 +5,7 @@ import Para from "../AddBlog/Para";
 import Image from "../AddBlog/Images";
 import Video from "../AddBlog/Video";
 import { UserContext } from "../../Context/Context";
+import BlogReview from "../BlogReview/BlogReview";
 function SingleBlog(props) {
    
   const [index, setIndex] = useState(0);
@@ -13,6 +14,7 @@ function SingleBlog(props) {
   const navigate = useNavigate();
   const data = JSON.parse(localStorage.getItem("blog"));
   const [blog, setblog] = useState([]);
+  const [date,setdate]=useState('')
   useEffect(() => {
     if (data[0]) {
       data.forEach((item, i) => {
@@ -35,7 +37,11 @@ function SingleBlog(props) {
       //   navigate("/blog");
     }
   }, []);
-  console.log(blog, "0--0");
+useEffect(()=>{
+ let time= new Date(blog[index]?.date)+''
+ time=time.slice(0,15)
+ setdate(time)
+},[index])
   return (
     <div className="grid grid-cols-12">
       <div className="col-span-1 "></div>
@@ -57,8 +63,10 @@ function SingleBlog(props) {
             return <Video url={item.deatials.text} key={i} />;
           }
         })}
+        <div className="font-semibold  border-b-4 border-slate-200 ">Posted date: <span className="font-normal">{date}</span> </div>
+        
       </div>
-      <div className="col-span-3 pt-10 px-5  flex flex-col">
+      <div className="col-span-3 pt-10 px-5 relative flex flex-col">
         <p className="capitalize   pl-8 underline font-semibold text-2xl">related Blogs</p>
         { 
         blog.map((item, i) => {
@@ -81,17 +89,20 @@ function SingleBlog(props) {
                     });
                     setIndex(i)
                 }} className="font-semibold text-sm" > {(index<i?i:i+1)+'. '+item.title}</h1>
-                <p className="text-xs h-9 overflow-hidden text-black">{item.description.map(value=>{
+                <p className="text-xs h-9 overflow-hidden dark:text-white  text-black">{item.description.map(value=>{
                     let count=0
                     if(value.type=='paragraph'&&count==0){
                         count++
                         return value.deatials.text
                     }
                 })}</p>
+            
               </div>
+                  
             );
           }
         })}
+        <BlogReview id={data[index]._id}/>
       </div>
     </div>
   );

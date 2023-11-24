@@ -22,7 +22,7 @@ async function handleSubmit(e){
   if(check){
 const res= await POST('/login',{email:emailRef.current.value,password:passwordRef.current.value})
  if(res.status){
-  console.log(token);
+
     login(res.token)
    navigate('/')
  }else{
@@ -42,14 +42,13 @@ const res= await POST('/login',{email:emailRef.current.value,password:passwordRe
       </div>
      
       <form onSubmit={handleSubmit} className="w-96 min-h-96 flex flex-col items-center border-gray-500 border-[1px]  mb-3">
-        <div className="pt-5">
+        <div className="pt-5 ">
           
-          <h1 className="font-black capitalize  font-display py-7 text-2xl">
-            
+        <h1 className="font-black capitalize  font-display py-7 text-2xl">
             jungle book
           </h1>
         </div>
-        <div className="w-full pt-5 relative flex justify-center">
+        <div className="w-full  relative flex justify-center">
           <input
           onChange={()=>validation([1],{email:emailRef.current.value},setErrMsg)}
             placeholder="Email"
