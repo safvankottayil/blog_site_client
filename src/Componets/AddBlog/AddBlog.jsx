@@ -145,7 +145,7 @@ function AddBlog() {
   }
 }))
       }} type="file" className="hidden" />
-      <div className="flex col-span-1 flex-col  h-screen bg-slate-50 items-end prdd-5 pt-3 pr-5  border-r-[1px] border-black dark:border-gray-400">
+      <div className="flex col-span-1 flex-col  h-screen bg-slate-50 dark:bg-black items-end prdd-5 pt-3 pr-5  border-r-[1px] border-black dark:border-gray-400">
         <div className="border-2 rounded-md p-2">
         <BiArrowBack
           onClick={() =>{navigate('/')}}
@@ -200,7 +200,7 @@ function AddBlog() {
         </div>
       </div>
       <div className="col-span-9 flex flex-col justify-between relative h-screen  flex-grow">
-        <div ref={scrollref} className="flex  bg-gray-200 m-3 pl-36 pt-10  overflow-y-auto rounded-lg flex-grow">
+        <div ref={scrollref} className="flex  dark:bg-gray-950 bg-gray-200 m-3 pl-36 pt-10  overflow-y-auto rounded-lg flex-grow">
           <div className="w-11/12">
             {/* <Title
               value={
