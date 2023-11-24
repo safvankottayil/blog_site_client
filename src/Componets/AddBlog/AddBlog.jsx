@@ -125,7 +125,7 @@ function AddBlog() {
     }
   }
   return (
-    <div className=" w-full grid grid-cols-12">
+    <div className=" w-full dark:bg-black grid grid-cols-12">
       {blogId ? "" : <AddblogModal update={setcount} />}
       <input onChange={(e)=>{
         setData(data.map((value,ind)=>{
