@@ -4,16 +4,21 @@ import {BsCloudSun} from 'react-icons/bs'
 function ThemeSwicher() {
     const [Theme,setTheme]=useState(null)
     useEffect(()=>{
-        if(window.matchMedia('prefer-color-scheme:dark').matches){
-            setTheme('dark')
+        if(localStorage.getItem('theme')){
+            setTheme(localStorage.getItem('theme'))
         }else{
             setTheme('light')
+            localStorage.setItem('theme','light')
         }
+       
+       
     },[])
     useEffect(()=>{
        if(Theme==='dark'){
+        localStorage.setItem('theme','dark')
         document.documentElement.classList.add('dark')
        }else{
+        localStorage.setItem('theme','light')
         document.documentElement.classList.remove('dark')
        }
     },[Theme])

@@ -8,10 +8,12 @@ const UserProvider = ({ children }) => {
    setToken(localStorage.getItem('token'))
    setblog(JSON.parse(localStorage.getItem('blog')))
    setHome(JSON.parse(localStorage.getItem('home')))
+   
   },[])
   const [token, setToken] = useState(null);
   const [blog,setblog]=useState([])
   const [home,setHome]=useState([])
+ 
   const login = (userData) => {
     setToken(userData);
     localStorage.setItem('token',userData)
